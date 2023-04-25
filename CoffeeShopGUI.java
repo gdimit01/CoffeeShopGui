@@ -1,7 +1,5 @@
 import javax.swing.*;
-
 import org.w3c.dom.events.MouseEvent;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +8,9 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import java.awt.Dimension;
 
+//TO DO: add menu Panel with vivid content
 
 public class CoffeeShopGUI {
 
@@ -26,6 +26,7 @@ public class CoffeeShopGUI {
     }
     static class WelcomePanel extends JPanel {
     private JButton startButton;
+    private JButton exitButton;
 
     public WelcomePanel(JFrame frame) {
         setLayout(new GridBagLayout());
@@ -46,7 +47,7 @@ public class CoffeeShopGUI {
         // Add an image underneath the welcome message
         // Add an image underneath the welcome message
         try {
-            URL imageUrl = new URL("https://cdn.mage.space/enhanced/esrgan/a0eef834e72d41fb88cfb27dd34af127.png");
+            URL imageUrl = new URL("https://cdn.mage.space/enhanced/esrgan/d74889fd55c34a59b70e54309ec9d59d.png");
             Image image = ImageIO.read(imageUrl);
             ImageIcon originalIcon = new ImageIcon(image);
             Image scaledImage = originalIcon.getImage().getScaledInstance(400, 600, Image.SCALE_SMOOTH);
@@ -71,6 +72,19 @@ public class CoffeeShopGUI {
         gbc.weighty = 0.1;
         add(startButton, gbc);
 
+        // Add the exit button
+        exitButton = new JButton("Exit");
+        exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        exitButton.setBackground(Color.BLACK);
+        exitButton.setForeground(Color.WHITE);
+        exitButton.setBorderPainted(false);
+        exitButton.setFocusPainted(false);
+        exitButton.setOpaque(true);
+        exitButton.setPreferredSize(new Dimension(200, 40));
+        gbc.gridy = 3;
+        gbc.weighty = 0.1;
+        add(exitButton, gbc);
+
         startButton.addMouseListener(new MouseAdapter() {
     @Override
 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -87,14 +101,34 @@ public void mouseExited(java.awt.event.MouseEvent evt) {
 
 });
 
+exitButton.addMouseListener(new MouseAdapter() {
+    @Override
+public void mouseEntered(java.awt.event.MouseEvent evt) {
+    exitButton.setBackground(new Color(255, 215, 0));
+    exitButton.setForeground(Color.BLACK);
+}
 
 
+    @Override
+public void mouseExited(java.awt.event.MouseEvent evt) {
+    exitButton.setBackground(Color.BLACK);
+    exitButton.setForeground(Color.WHITE);
+}
+
+});
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setContentPane(new CoffeeOrderPanel());
                 frame.pack();
+            }
+        });
+        // Add an ActionListener to the exit button to exit the program
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
@@ -112,6 +146,10 @@ public void mouseExited(java.awt.event.MouseEvent evt) {
 
         public CoffeeOrderPanel() {
             setLayout(new BorderLayout());
+
+        // Add these two lines to set the size of the panel
+        Dimension panelSize = new Dimension(700, 600);
+        setPreferredSize(panelSize);
 
             String[] coffeeTypes = {"Espresso", "Latte", "Cappuccino"};
             String[] sizes = {"Small", "Medium", "Large"};
