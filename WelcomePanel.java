@@ -100,7 +100,7 @@ public void mouseExited(java.awt.event.MouseEvent evt) {
 });
 
 //highlight over menulist
-exitButton.addMouseListener(new MouseAdapter() {
+menuButton.addMouseListener(new MouseAdapter() {
     @Override
 public void mouseEntered(java.awt.event.MouseEvent evt) {
     menuButton.setBackground(new Color(255, 215, 0));
@@ -135,7 +135,7 @@ public void mouseExited(java.awt.event.MouseEvent evt) {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setContentPane(new CoffeeOrderPanel());
+                frame.setContentPane(new CoffeeOrderPanel(frame));
                 frame.pack();
             }
         });
@@ -144,7 +144,7 @@ public void mouseExited(java.awt.event.MouseEvent evt) {
 menuButton.addActionListener(new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
-        frame.setContentPane(new MenuListPanel());
+        frame.setContentPane(new MenuListPanel(frame));
         frame.pack();
     }
 });

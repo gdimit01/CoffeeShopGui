@@ -11,14 +11,14 @@ public class CoffeeOrderPanel extends JPanel {
     private JTextArea orderSummaryTextArea;
     private double totalPrice = 0.0;
 
-    public CoffeeOrderPanel() {
+    public CoffeeOrderPanel(JFrame frame) {
         setLayout(new BorderLayout());
 
         // Add these two lines to set the size of the panel
         Dimension panelSize = new Dimension(700, 600);
         setPreferredSize(panelSize);
 
-        String[] coffeeTypes = {"Espresso", "Latte", "Cappuccino"};
+        String[] coffeeTypes = {"Espresso", "Latte", "Cappuccino", "Americano", "Tea", "Hot Chocolate"};
         String[] sizes = {"Small", "Medium", "Large"};
 
         coffeeTypeComboBox = new JComboBox<>(coffeeTypes);
@@ -63,7 +63,24 @@ public class CoffeeOrderPanel extends JPanel {
                 totalPrice = 0.0;
             }
         });
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setContentPane(new WelcomePanel(frame));
+                frame.pack();
+            }
+        });
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        add(backButton, BorderLayout.SOUTH);
     }
+    
 
     private double calculatePrice(String coffeeType, String size) {
         double basePrice;
@@ -80,6 +97,15 @@ public class CoffeeOrderPanel extends JPanel {
                 break;
             default:
                 basePrice = 0.0;
+            case "Americano":
+                basePrice = 1.0;
+                break;
+            case "Tea":
+                basePrice = 1.5;
+                break;
+            case "Hot Chocolate":
+                basePrice = 1.75;
+                break;
         }
 
         double sizeMultiplier;
@@ -100,4 +126,6 @@ public class CoffeeOrderPanel extends JPanel {
 
         return basePrice * sizeMultiplier;
     }
+    
 }
+
