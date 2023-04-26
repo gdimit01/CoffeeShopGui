@@ -30,12 +30,12 @@ public class CoffeeShopGUI {
 
     public WelcomePanel(JFrame frame) {
         setLayout(new GridBagLayout());
-        setBackground(Color.DARK_GRAY); // Set background color to dark gray
+        setBackground(Color.BLACK); // Set background color to Black
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel welcomeLabel = new JLabel("Welcome to the Coffee Shop!", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Serif", Font.BOLD, 36));
-        welcomeLabel.setForeground(Color.BLUE);
+        welcomeLabel.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
@@ -47,7 +47,7 @@ public class CoffeeShopGUI {
         // Add an image underneath the welcome message
         // Add an image underneath the welcome message
         try {
-            URL imageUrl = new URL("https://cdn.mage.space/enhanced/esrgan/d74889fd55c34a59b70e54309ec9d59d.png");
+            URL imageUrl = new URL("https://cdn.mage.space/enhanced/esrgan/ace8972dcbc1444aa4502fb3d23f8463.png");
             Image image = ImageIO.read(imageUrl);
             ImageIcon originalIcon = new ImageIcon(image);
             Image scaledImage = originalIcon.getImage().getScaledInstance(400, 600, Image.SCALE_SMOOTH);
